@@ -1,0 +1,31 @@
+.root {
+    display: flex;
+}    
+header {
+    background-image: linear-gradient(to right, rgb(67, 67, 154), darkblue);
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    height: 10vw;
+}
+
+h2 {
+    padding-top: 3.5vw;
+}
+
+aside {
+    margin-left: 3vw;
+    margin-top: 5vw;
+    justify-content: flex-start;
+    width: 10vw;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#searchBtn {
+    width: 10vw;
+    margin-top: 1vw;
+    background-image: linear-gradient(to right, rgb(67, 67, 154), darkblue);
+    color: white;   
+    font-size: 15px;
+}

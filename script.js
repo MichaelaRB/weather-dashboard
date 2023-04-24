@@ -5,7 +5,10 @@ var coordinates = [];
 var latitude;
 var longitude;
 
+var inputEl = $("#searchBtn");
+
 function getLocation(city) {
+    locUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
     locUrl = locUrl + city + "&appid=71a47e531d4c080f7770f0bd1e588da9";
     fetch(locUrl)
         .then(function (response) {
@@ -17,7 +20,14 @@ function getLocation(city) {
             longitude = data[0].lon;
         });
 }
-getLocation("Shawnee");
-setTimeout(() => {
-    console.log(latitude);
-}, 1000);
+
+inputEl.on('click', function(e) {
+    e.preventDefault();
+    var city = inputEl.parent().children("#cityInput").val();
+    getLocation(city);
+    console.log(city);
+    setTimeout(() => {
+        console.log(latitude);
+    }, 1000);
+})
+
