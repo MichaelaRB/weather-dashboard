@@ -101,7 +101,7 @@ inputEl.on('click', function(e) {
     todayWeather.empty();
     fiveDays.empty();
     var city = inputEl.parent().children("#cityInput").val();
-    searchHistory.push(city);    
+    searchHistory.unshift(city);    
     localStorage.setItem("history",JSON.stringify(searchHistory));
     getLocation(city);
     setTimeout(() => {
