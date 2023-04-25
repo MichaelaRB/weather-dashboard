@@ -10,16 +10,16 @@ header {
 }
 
 h2 {
-    padding-top: 3.5vw;
+    padding-top: 3vw;
 }
 
 aside {
     margin-left: 3vw;
     margin-top: 5vw;
-    justify-content: flex-start;
-    width: 15vw;
+    width: 20vw;
     font-size: 20px;
     font-weight: 500;
+    float: left;
 }
 
 #cityInput {
@@ -27,9 +27,24 @@ aside {
 }
 
 #searchBtn {
-    width: 15vw;
+    width: 100%;
     margin-top: 1vw;
     background-image: linear-gradient(to right, rgb(67, 67, 154), darkblue);
     color: white;   
+    font-size: 20px;
+}
+
+.todayForecast {
+    width: 60vw;
+    float: right;
+    margin-right: 10vw;
+    margin-top: 5vw;
+}
+
+.histBtn {
+    margin-top: 1vw;
+    width: 100%;
     font-size: 15px;
+    background-color: rgb(152, 152, 183);
+    color: white;
 }
