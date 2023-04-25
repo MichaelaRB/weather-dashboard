@@ -10,18 +10,32 @@ var inputEl = $("#searchBtn");
 var todayWeather = $(".todayForecast");
 var fiveDays = $(".fiveDays");
 
-setTimeout(()=> {
-    if(localStorage.getItem("history") !== null) renderHistory();
-}, 500);
+if(localStorage.getItem("history") !== null) renderHistory();
 
 function renderHistory() {
     historyEl.empty();
     var saveHistory = JSON.parse(localStorage.getItem("history"));
+
+    if(saveHistory.length >= 10) {
+        saveHistory.splice(10);
+    }
     for(var i = 0; i < saveHistory.length; i++) {
         var histBtn = document.createElement("button");
         histBtn.setAttribute("class","histBtn");
         histBtn.textContent = saveHistory[i];
         historyEl.append(histBtn);
+
+        histBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            todayWeather.empty();
+            fiveDays.empty();
+            var city = e.currentTarget.textContent;    
+            getLocation(city);
+            setTimeout(() => {
+                getForecast(latitude, longitude, city);
+            }, 500);
+            renderHistory();
+        });
     }
 }
 
@@ -108,4 +122,12 @@ inputEl.on('click', function(e) {
         getForecast(latitude, longitude, city);
     }, 500);
     renderHistory();
+});
+
+//prevent submit when pressing enter, from https://stackoverflow.com/questions/59503468/prevent-bootstrap-form-to-submit-with-enter
+$("form").keypress(function(e){
+    if(e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
 })
