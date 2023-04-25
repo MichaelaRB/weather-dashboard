@@ -13,6 +13,10 @@ h2 {
     padding-top: 3vw;
 }
 
+h5 {
+    margin-left: 10px;
+}
+
 aside {
     margin-left: 3vw;
     margin-top: 5vw;
@@ -34,11 +38,36 @@ aside {
     font-size: 20px;
 }
 
-.todayForecast {
+.todayForecast, .fiveDays {
     width: 60vw;
     float: right;
     margin-right: 10vw;
     margin-top: 5vw;
+}
+
+.card {
+    padding: 1%;
+}
+
+.fiveDays {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fiveDays .card{
+    width: 10vw;
+    display: inline-block;
+    padding-right: 5%;
+    margin-right: 3vw;
+    font-size: 10px;
+    background-color: darkblue;
+    color: white;
+    text-align: center;
+}
+
+.fiveDays h5 {
+    font-size: 12px;
+    margin-left: 30%;
 }
 
 .histBtn {

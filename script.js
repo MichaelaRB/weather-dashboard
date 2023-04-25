@@ -60,53 +60,52 @@ function getForecast(lat, lon, city) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-         
-            var humidity = "Humidity: " + data.list[0].main.humidity + "%";
-            var windSpeed = "Wind speed: " + data.list[0].wind.speed + "MPH";
-            var temp = "Temperature: " + data.list[0].main.temp + "°F";
-            var date = data.list[0].dt_txt.split(" ");
-            var title = city + " (" + date[0] + ")";
+            for(var i = 0; i < 6; i ++)
+            {
+                var humidity = "Humidity: " + data.list[i].main.humidity + "%";
+                var windSpeed = "Wind speed: " + data.list[i].wind.speed + "MPH";
+                var temp = "Temperature: " + data.list[i].main.temp + "°F";
+                var date = data.list[i].dt_txt.split(" ");
+                var title = city + " (" + date[0] + ")";
            
-            var cardEl = document.createElement('article');
-            cardEl.setAttribute('class','mx-auto my-2 card');
-            cardEl.setAttribute('style', 'width: 100%');
-            cardEl.setAttribute('style','padding: 2vw');
+                var cardEl = document.createElement('article');
+                cardEl.setAttribute('class','mx-auto my-2 card');
+                //add title to the card
+                var titleEl = document.createElement('h5');
+                titleEl.setAttribute('class', 'card-title');
+                titleEl.textContent = title;
+                cardEl.append(titleEl);
 
-            //add title to the card
-            var titleEl = document.createElement('h5');
-            titleEl.setAttribute('class', 'card-title');
-            titleEl.textContent = title;
-            cardEl.append(titleEl);
+                //add weather icon to the card
+                var icon = data.list[i].weather[0].icon;
+                var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+                var weatherIcon = document.createElement('img');
+                weatherIcon.setAttribute('src', iconUrl);
+                weatherIcon.setAttribute('alt','An icon depicting the expected weather conditions for the day');
+                weatherIcon.setAttribute('class','card-img-top');
+                weatherIcon.setAttribute('style','width: 50px')
+                cardEl.append(weatherIcon);
 
-            //add weather icon to the card
-            var icon = data.list[0].weather[0].icon;
-            var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-            var weatherIcon = document.createElement('img');
-            weatherIcon.setAttribute('src', iconUrl);
-            weatherIcon.setAttribute('alt','An icon depicting the expected weather conditions for the day');
-            weatherIcon.setAttribute('class','card-img-top');
-            weatherIcon.setAttribute('style','width: 50px')
-            cardEl.append(weatherIcon);
+                //add weather info to the card
+                var infoEl = document.createElement('p');
+                var listEl = document.createElement('ul');
+                var humidEl = document.createElement('li');
+                var windEl = document.createElement('li');
+                var tempEl = document.createElement('li');
 
-            //add weather info to the card
-            var infoEl = document.createElement('p');
-            var listEl = document.createElement('ul');
-            var humidEl = document.createElement('li');
-            var windEl = document.createElement('li');
-            var tempEl = document.createElement('li');
+                listEl.setAttribute('style', 'list-style-type: none');
+                humidEl.textContent = humidity;
+                windEl.textContent = windSpeed;
+                tempEl.textContent = temp;
+                listEl.append(humidEl);
+                listEl.append(windEl);
+                listEl.append(tempEl);
+                infoEl.append(listEl);
+                cardEl.append(listEl);
 
-            listEl.setAttribute('style', 'list-style-type: none');
-            humidEl.textContent = humidity;
-            windEl.textContent = windSpeed;
-            tempEl.textContent = temp;
-            listEl.append(humidEl);
-            listEl.append(windEl);
-            listEl.append(tempEl);
-            infoEl.append(listEl);
-            cardEl.append(listEl);
-
-            todayWeather.append(cardEl);
+                if(i == 0) todayWeather.append(cardEl);
+                if(i > 0) fiveDays.append(cardEl);
+            }
         });
 }
 
@@ -115,6 +114,7 @@ inputEl.on('click', function(e) {
     todayWeather.empty();
     fiveDays.empty();
     var city = inputEl.parent().children("#cityInput").val();
+    if(city === null || city ==="") return;
     if(localStorage.getItem("history") !== null) searchHistory = JSON.parse(localStorage.getItem("history"));
     searchHistory.unshift(city);    
     localStorage.setItem("history",JSON.stringify(searchHistory));
