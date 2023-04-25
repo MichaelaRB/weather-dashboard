@@ -115,6 +115,7 @@ inputEl.on('click', function(e) {
     todayWeather.empty();
     fiveDays.empty();
     var city = inputEl.parent().children("#cityInput").val();
+    if(localStorage.getItem("history") !== null) searchHistory = JSON.parse(localStorage.getItem("history"));
     searchHistory.unshift(city);    
     localStorage.setItem("history",JSON.stringify(searchHistory));
     getLocation(city);
