@@ -17,13 +17,17 @@ aside {
     margin-left: 3vw;
     margin-top: 5vw;
     justify-content: flex-start;
-    width: 10vw;
+    width: 15vw;
     font-size: 20px;
     font-weight: 500;
 }
 
+#cityInput {
+    margin-top: .5vw;
+}
+
 #searchBtn {
-    width: 10vw;
+    width: 15vw;
     margin-top: 1vw;
     background-image: linear-gradient(to right, rgb(67, 67, 154), darkblue);
     color: white;   

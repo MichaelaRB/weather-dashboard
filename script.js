@@ -6,6 +6,8 @@ var latitude;
 var longitude;
 
 var inputEl = $("#searchBtn");
+var todayWeather = $(".todayForecast");
+var fiveDays = $(".fiveDays");
 
 function getLocation(city) {
     var geoUrl = locUrl + city + "&appid=71a47e531d4c080f7770f0bd1e588da9";
@@ -14,7 +16,6 @@ function getLocation(city) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             latitude = data[0].lat;
             longitude = data[0].lon;
         });
@@ -28,6 +29,12 @@ function getForecast(lat, lon) {
         })
         .then(function (data) {
             console.log(data);
+            var icon = data.list[0].weather[0].icon;
+            var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+            var temp = data.list[0].main.temp + "°F";
+            var humidity = data.list[0].main.humidity + "%";
+            var windSpeed = data.list[0].wind.speed + "MPH";
+            console.log(icon);
         });
 }
 
@@ -38,6 +45,7 @@ inputEl.on('click', function(e) {
     getLocation(city);
     setTimeout(() => {
         getForecast(latitude, longitude);
+
     }, 1000);
 })
 
