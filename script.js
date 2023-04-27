@@ -1,6 +1,6 @@
 var key = "71a47e531d4c080f7770f0bd1e588da9";
 var BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat=";
-var locUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
+var locUrl = "https://api.openweathermap.org/geo/1.0/direct?q=";
 var searchHistory = [];
 var latitude;
 var longitude;
